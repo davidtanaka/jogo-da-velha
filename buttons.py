@@ -1,23 +1,10 @@
-from PySide6.QtWidgets import QGridLayout, QPushButton
+import sys
+from PySide6.QtWidgets import QApplication, QPushButton
 
-class Button(QPushButton):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.configStyle()
+app = QApplication(sys.argv)
 
-    def configStyle(self):
-        font = self.font()
-        self.setFont(font)
-        self.setMinimumSize(55, 55)
+botao = QPushButton('Texto do botão')
+botao.setStyleSheet('font-size: 40px;')
+botao.show()
 
-class ButtonsOptions(QGridLayout):
-    _buttons = [
-            ['C', '◀', '^', '/'],
-            ['7', '8', '9', '*'],
-            ['4', '5', '6', '-'],
-        ]
-    
-    def _makeGrid(self):
-        for rowNumber, row in enumerate(self._buttons): # type: ignore
-            for colNumber, buttonText in enumerate(row):
-                button = Button(buttonText)
+app.exec()
