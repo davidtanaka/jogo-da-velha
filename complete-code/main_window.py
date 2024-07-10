@@ -1,3 +1,4 @@
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QWidget, QGridLayout, QLabel
 
 class MainWindow(QMainWindow):
@@ -13,6 +14,10 @@ class MainWindow(QMainWindow):
         # Título da janela
         self.setWindowTitle( 'Jogo da velha ')
 
+
     def adjustFixedSize(self) -> None:
         self.adjustSize()
         self.setFixedSize(self.width(), self.height())
+
+    def addWidgetToVLayout(self, widget: QWidget):
+        self.v_layout.addWidget(widget)
