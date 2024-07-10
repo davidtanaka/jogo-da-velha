@@ -1,7 +1,13 @@
 import sys
-from PySide6.QtWidgets import QApplication, QPushButton, QGridLayout, QWidget
+from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow,
+                               QPushButton, QWidget)
 
 app = QApplication(sys.argv)
+window = QMainWindow()
+central_widget = QWidget()
+window.setCentralWidget(central_widget)
+window.setWindowTitle('Minha janela bonita')
+
 
 botao = QPushButton('n')
 botao.setStyleSheet('font-size: 30px;')
