@@ -42,4 +42,4 @@ class ButtonsGrid(QGridLayout):
         if button.state is None:  # Verifica se o botão ainda não foi marcado
             button.setState(self.current_turn)
              # Alterna entre 'X' e 'O'
-            self.current_turn = 'O' if self.current_turn == 'X' else 'X' 
+            self.current_turn = 'O' if self.current_turn == 'X' else 'O' 
