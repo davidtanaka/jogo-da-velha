@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QGridLayout, QWidget, QPushButton
-from main_window import MainWindow             
+from PySide6.QtWidgets import QGridLayout, QPushButton
+from main_window import MainWindow
 
 class Button(QPushButton):
     def __init__(self, *args, **kwargs):
@@ -22,7 +22,7 @@ class ButtonsGrid(QGridLayout):
     def __init__(self, window: 'MainWindow', *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._window = window  # Passamos a janela principal recebida como parâmetro
-        self.current_turn = 'X'  # Inicialmente, começa com 'X'
+        self.currentTurn = 'X'  # Inicialmente, começa com 'X'
         self._gridMask = [
             [' ', ' ', ' '],
             [' ', ' ', ' '],
@@ -35,11 +35,16 @@ class ButtonsGrid(QGridLayout):
             for colNumber, buttonText in enumerate(row):
                 button = Button(buttonText)
                 button.setStyleSheet('font-size: 60px; width: 70px;')
-                button.clicked.connect(lambda _, b=button: self.buttonClicked(b))
+                button.clicked.connect(lambda _, r=rowNumber, c=colNumber,
+                                    b=button: self.buttonClicked(b, r, c))
                 self.addWidget(button, rowNumber, colNumber)
 
-    def buttonClicked(self, button):
+    def buttonClicked(self, button: Button, row: int, col: int):
         if button.state is None:  # Verifica se o botão ainda não foi marcado
-            button.setState(self.current_turn)
-             # Alterna entre 'X' e 'O'
-            self.current_turn = 'O' if self.current_turn == 'X' else 'O' 
+            button.setState(self.currentTurn)
+            # Atualiza _gridMask na posição do botão clicado
+            self._gridMask[row][col] = self.currentTurn  
+            print(self._gridMask)
+            # Alterna entre 'X' e 'O'
+            self.currentTurn = 'O' if self.currentTurn == 'X' else 'X'
+
