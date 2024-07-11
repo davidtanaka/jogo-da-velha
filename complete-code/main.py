@@ -2,10 +2,12 @@ import sys
 from main_window import MainWindow
 from constants import WINDOW_ICON_PATH
 from PySide6.QtGui import QIcon
+from styles import setupTheme
 from PySide6.QtWidgets import QApplication, QLabel
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    setupTheme(app)
     window = MainWindow()
 
     #  Definindo o Ícone
