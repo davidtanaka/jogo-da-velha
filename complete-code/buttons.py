@@ -4,6 +4,13 @@ from main_window import MainWindow
 class Button(QPushButton):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.configStyle()
+
+    def configStyle(self):
+        font = self.font()
+        self.setFont(font)
+        self.setMinimumSize(90, 90)
+        self.setProperty('cssClass', 'specialButton')
 
 class ButtonsGrid(QGridLayout):
     def __init__(self, window: 'MainWindow', *args, **kwargs) -> None:
