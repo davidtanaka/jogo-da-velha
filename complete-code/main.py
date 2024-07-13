@@ -1,7 +1,7 @@
 import sys
 from main_window import MainWindow
 from constants import WINDOW_ICON_PATH
-from buttons import Button, ButtonsGrid
+from buttons import ButtonsGrid
 from PySide6.QtGui import QIcon
 from styles import setupTheme
 from PySide6.QtWidgets import QApplication, QLabel
@@ -16,6 +16,7 @@ if __name__ == '__main__':
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
 
+    # Configurando botões 
     buttonsGrid = ButtonsGrid(window)
     window.vLayout.addLayout(buttonsGrid)
 
