@@ -16,6 +16,9 @@ class Button(QPushButton):
         self.state = state
         self.setText(state)
 
+    def reset(self):
+        self.state = None
+        self.setText('')
 
 class ButtonsGrid(QGridLayout):
     def __init__(self, window: 'MainWindow', *args, **kwargs) -> None:
@@ -30,7 +33,9 @@ class ButtonsGrid(QGridLayout):
         self._createButtons()
 
     def _createButtons(self):
+        self.buttons = []
         for rowNumber, row in enumerate(self._gridMask):
+            rowButtons = []
             for colNumber, buttonText in enumerate(row):
                 button = Button()
                 button.setStyleSheet('font-size: 60px; width: 70px;')
@@ -38,7 +43,8 @@ class ButtonsGrid(QGridLayout):
                 button.clicked.connect(lambda _, r=rowNumber, c=colNumber,
                                         b=button: self.buttonClicked(b, r, c))
                 self.addWidget(button, rowNumber, colNumber)
-    
+                rowButtons.append(button)
+            self.buttons.append(rowButtons)
     
     def checkWin(self):
         # Verificação de linhas
@@ -48,13 +54,16 @@ class ButtonsGrid(QGridLayout):
         
         # Verificação de colunas
         for col in range(3):
-            if self._gridMask[0][col] == self._gridMask[1][col] == self._gridMask[2][col] and self._gridMask[0][col] != '':
+            if (self._gridMask[0][col] == self._gridMask[1][col] ==
+                self._gridMask[2][col] and self._gridMask[0][col] != ''):
                 return True
 
         # Verificação das diagonais
-        if self._gridMask[0][0] == self._gridMask[1][1] == self._gridMask[2][2] and self._gridMask[0][0] != '':
+        if (self._gridMask[0][0] == self._gridMask[1][1] == self._gridMask[2][2]
+            and self._gridMask[0][0] != ''):
             return True
-        if self._gridMask[0][2] == self._gridMask[1][1] == self._gridMask[2][0] and self._gridMask[0][2] != '':
+        if (self._gridMask[0][2] == self._gridMask[1][1] == self._gridMask[2][0]
+            and self._gridMask[0][2] != ''):
             return True
         
         return False
@@ -70,7 +79,19 @@ class ButtonsGrid(QGridLayout):
             # Verifica se alguém venceu
             if self.checkWin():
                 print(f'{self.currentTurn} venceu!')
+                self.resetGame()  # Reinicia o jogo
                 return  # Interrompe a função se houver um vencedor
 
             # Alterna entre 'X' e 'O'
             self.currentTurn = 'O' if self.currentTurn == 'X' else 'X'
+
+    def resetGame(self):
+        self.currentTurn = 'X'  # Reinicia com 'X'
+        self._gridMask = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', ''],
+        ]
+        for row in self.buttons:
+            for button in row:
+                button.reset()  # Redefine cada botão
