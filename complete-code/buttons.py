@@ -30,9 +30,9 @@ class ButtonsGrid(QGridLayout):
             ['', '', ''],
             ['', '', ''],
         ]
-        self._createButtons()
+        self.__createButtons()
 
-    def _createButtons(self):
+    def __createButtons(self):
         self.buttons = []
         for rowNumber, row in enumerate(self._gridMask):
             rowButtons = []
