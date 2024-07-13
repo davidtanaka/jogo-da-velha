@@ -11,8 +11,7 @@ class Button(QPushButton):
         font = self.font()
         self.setFont(font)
         self.setMinimumSize(90, 90)
-        self.setProperty('cssClass', 'specialButton')
-
+        
     def setState(self, state):
         self.state = state
         self.setText(state)
