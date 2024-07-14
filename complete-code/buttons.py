@@ -75,15 +75,14 @@ class ButtonsGrid(QGridLayout):
             # Atualiza _gridMask na posição do botão clicado
             self._gridMask[row][col] = self.currentTurn  
             print(self._gridMask)
-            
             # Verifica se alguém venceu
             if self.checkWin():
-                print(f'{self.currentTurn} venceu!')
                 self.resetGame()  # Reinicia o jogo
                 return  # Interrompe a função se houver um vencedor
 
             # Alterna entre 'X' e 'O'
             self.currentTurn = 'O' if self.currentTurn == 'X' else 'X'
+
 
     def resetGame(self):
         self.currentTurn = 'X'  # Reinicia com 'X'

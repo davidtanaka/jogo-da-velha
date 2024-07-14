@@ -3,9 +3,9 @@ from main_window import MainWindow
 from constants import WINDOW_ICON_PATH
 from buttons import ButtonsGrid
 from PySide6.QtGui import QIcon
+from info import Info
 from styles import setupTheme
 from PySide6.QtWidgets import QApplication
-from display import Display
 
 if __name__ == '__main__':
     # Cria a aplicação
@@ -18,10 +18,9 @@ if __name__ == '__main__':
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
 
-    # Display
-    display = Display()
-    window.addWidgetToVLayout(display)
-
+    # Info
+    info = Info('O vencedor da partida foi')
+    window.addWidgetToVLayout(info)
 
     # Configurando botões Grid
     buttonsGrid = ButtonsGrid(window)
