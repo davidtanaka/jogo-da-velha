@@ -13,7 +13,7 @@ if __name__ == '__main__':
     setupTheme(app)
     window = MainWindow()
 
-    #  Definindo o Ícone
+    # Define o ícone
     icon = QIcon(str(WINDOW_ICON_PATH))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
@@ -21,10 +21,18 @@ if __name__ == '__main__':
     # Info
     info = Info()
     window.addWidgetToVLayout(info)
+    info.setText('Jogue com alguem! ')
     
     # Configurando botões Grid
     buttonsGrid = ButtonsGrid(window, info)
     window.vLayout.addLayout(buttonsGrid)
+
+# Condição para aparecer o ícone na barra de tarefas (windows).
+    if sys.platform.startswith('win'):
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+            u'CompanyName.ProductName.SubProduct.VersionInformation')
+         # Arbitrary string 
 
     # Executando tudo
     window.adjustFixedSize()

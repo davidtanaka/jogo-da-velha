@@ -2,7 +2,7 @@ from pathlib import Path
 
 Root_DIR = Path(__file__).parent
 FILES_DIR = Root_DIR / 'files'
-WINDOW_ICON_PATH = FILES_DIR / 'icon.png'
+WINDOW_ICON_PATH = FILES_DIR / 'icon.webp'
 
 # Colors
 PRIMARY_COLOR = '#1e81b0'
