@@ -83,7 +83,6 @@ class ButtonsGrid(QGridLayout):
 
             # Atualiza _gridMask na posição do botão clicado
             self._gridMask[row][col] = self.currentTurn  
-            print(self._gridMask)
 
             # Verifica se alguém venceu
             if self.checkWin():
