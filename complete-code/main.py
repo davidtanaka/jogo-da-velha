@@ -19,11 +19,11 @@ if __name__ == '__main__':
     app.setWindowIcon(icon)
 
     # Info
-    info = Info('O vencedor da partida foi')
+    info = Info()
     window.addWidgetToVLayout(info)
-
+    
     # Configurando botões Grid
-    buttonsGrid = ButtonsGrid(window)
+    buttonsGrid = ButtonsGrid(window, info)
     window.vLayout.addLayout(buttonsGrid)
 
     # Executando tudo

@@ -3,8 +3,8 @@ from constants import MEDIUM_FONT_SIZE
 
 # Classe para mostrar as contas em cima do display
 class Info(QLabel):
-    def __init__(self, text: str, parent: QWidget | None = None) -> None:
-        super().__init__(text, parent)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self.configStyle()
 
     def configStyle(self):
