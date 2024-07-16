@@ -48,6 +48,29 @@ class ButtonsGrid(QGridLayout):
                 rowButtons.append(button)
             self.buttons.append(rowButtons)
 
+
+    def buttonClicked(self, button: Button, row: int, col: int):
+        if button.state is None:  # Verifica se o botão ainda não foi marcado
+            button.setState(self.currentTurn)
+
+            # Atualiza _gridMask na posição do botão clicado
+            self._gridMask[row][col] = self.currentTurn  
+
+            # Verifica se alguém venceu
+            if self.checkWin():
+                self.printResult('Winner is ', self.currentTurn)
+                self.resetGame()  # Reinicia o jogo
+                return  # Interrompe a função se houver um vencedor
+
+            # Verifica se todos os botões foram clicados e não há vencedor
+            if self.checkDraw():
+                self.printResult('Results is ', 'DRAW')
+                self.resetGame()  # Reinicia o jogo
+                return  # Interrompe a função se houver um empate
+
+            # Alterna entre 'X' e 'O'
+            self.currentTurn = 'O' if self.currentTurn == 'X' else 'X'
+
     def checkWin(self):
         # Verificação de linhas
         for row in self._gridMask:
@@ -76,28 +99,7 @@ class ButtonsGrid(QGridLayout):
                 if cell == '':
                     return False
         return True
-
-    def buttonClicked(self, button: Button, row: int, col: int):
-        if button.state is None:  # Verifica se o botão ainda não foi marcado
-            button.setState(self.currentTurn)
-
-            # Atualiza _gridMask na posição do botão clicado
-            self._gridMask[row][col] = self.currentTurn  
-
-            # Verifica se alguém venceu
-            if self.checkWin():
-                self.printResult('Winner is ', self.currentTurn)
-                self.resetGame()  # Reinicia o jogo
-                return  # Interrompe a função se houver um vencedor
-
-            # Verifica se todos os botões foram clicados e não há vencedor
-            if self.checkDraw():
-                self.printResult('Results is ', 'DRAW')
-                self.resetGame()  # Reinicia o jogo
-                return  # Interrompe a função se houver um empate
-
-            # Alterna entre 'X' e 'O'
-            self.currentTurn = 'O' if self.currentTurn == 'X' else 'X'
+    
 
     def resetGame(self):
         self.currentTurn = 'X'  # Reinicia com 'X'
@@ -109,6 +111,7 @@ class ButtonsGrid(QGridLayout):
         for row in self.buttons:
             for button in row:
                 button.reset()  # Redefine cada botão
+
 
     def printResult(self, textAnswers, value):
         self._info.setText(f'{textAnswers}: {value}')
